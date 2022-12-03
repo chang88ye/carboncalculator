@@ -8,9 +8,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 /*body {
-background: linear-gradient(to right, red, yellow);
-}*/
-/*.slider {
+  background: linear-gradient(to right, red, yellow);
+}
+.slider {
 position: absolute;
 top: 50%;
 left: 50%;
@@ -25,14 +25,14 @@ display: flex;
 align-items: center;
 box-shadow: 0px 15px 40px #7E6D5766;
 }*/
-.slider p {
+/*.slider p {
 font-size: 16px;
 font-weight: 600;
 font-family: Open Sans;
 padding-left: 30px;
 color: black;
 }
-/*.slider input[type="range"] {
+.slider input[type="range"] {
 -webkit-appearance:none !important;
 width: 200px;
 height: 2px;
@@ -48,10 +48,10 @@ background: black;
 border: 2px solid black;
 border-radius: 50%;
 cursor: pointer;
-}*/
-.slider input[type="range"]::-webkit-slider-thumb:hover {
-background: black;
 }
+.slider input[type="range"]::-webkit-slider-thumb:hover {
+background: black;*/
+
 
 form label {
   display: inline-block; /* this is important */
@@ -159,34 +159,39 @@ form label {
 
             <p style="font-size:2em">Grown AgriTech Vertical Farming</p>
 
+<!--             <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            <p>Value: <span id="demo"></span></p>
+            </div> -->
+
             <div class="slider" style="margin-top:15px; margin-bottom: 15px;">
             <label for="vf_fertilizer">Fertilizer (between 0 and 100%):</label>
-            <input type="range" id="vf_fertilizer" name="vf_fertilizer" min="0" max="100" value="5" oninput="rangeValue.innerText = this.value"> 
-            <span id="rangeValue">5</span>
+            <input type="range" id="s1" name="vf_fertilizer" min="0" max="100" value="{{request.form['vf_fertilizer']}}" oninput="rangeValue1.innerText = this.value"> 
+            <span id="rangeValue1">{{request.form['vf_fertilizer']}}</span>
             </div>
 
             <div class="slider" style="margin-top:15px; margin-bottom: 15px;">
             <label for="vf_plant">Plant propagation (between 0 and 100%):</label>
-            <input type="range" id="vf_plant" name="vf_plant" min="0" max="100" value="5" oninput="rangeValue.innerText = this.value"> 
-            <span id="rangeValue">5</span>
+            <input type="range" id="s2" name="vf_plant" min="0" max="100" value="{{request.form['vf_plant']}}" oninput="rangeValue2.innerText = this.value"> 
+            <span id="rangeValue2">{{request.form['vf_plant']}}</span>
             </div>
 
             <div class="slider" style="margin-top:15px; margin-bottom: 15px;">
             <label for="vf_soil">Soil management (between 0 and 100%):</label>
-            <input type="range" id="vf_soil" name="vf_soil" min="0" max="100" value="0" oninput="rangeValue.innerText = this.value"> 
-            <span id="rangeValue">0</span>
+            <input type="range" id="s3" name="vf_soil" min="0" max="100" value="{{request.form['vf_soil']}}" oninput="rangeValue3.innerText = this.value"> 
+            <span id="rangeValue3">{{request.form['vf_soil']}}</span>
             </div>
 
             <div class="slider" style="margin-top:15px; margin-bottom: 15px;">
             <label for="vf_ph">Postharvest cooling (between 0 and 100%):</label>
-            <input type="range" id="vf_ph" name="vf_ph" min="0" max="100" value="0" oninput="rangeValue.innerText = this.value"> 
-            <span id="rangeValue">0</span>
+            <input type="range" id="s4" name="vf_ph" min="0" max="100" value="{{request.form['vf_ph']}}" oninput="rangeValue4.innerText = this.value"> 
+            <span id="rangeValue4">{{request.form['vf_ph']}}</span>
             </div>
 
             <div class="slider" style="margin-top:15px; margin-bottom: 15px;">
             <label for="vf_bm">Building & maintenance (between 0 and 100%):</label>
-            <input type="range" id="vf_bm" name="vf_bm" min="0" max="100" value="20" oninput="rangeValue.innerText = this.value"> 
-            <span id="rangeValue">20</span>
+            <input type="range" id="s5" name="vf_bm" min="0" max="100" value="{{request.form['vf_bm']}}" oninput="rangeValue5.innerText = this.value"> 
+            <span id="rangeValue5">{{request.form['vf_bm']}}</span>
             </div>
 
             <!-- <form action="carbon_emissions.html" method="get"> -->
@@ -213,5 +218,28 @@ form label {
       </div>
 
 </form>
+
+<!-- <script>
+var slider = document.getElementById('s'+x);
+var output = document.getElementById("rangeValue");
+output.innerHTML = slider.value;
+ 
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+</script> -->
+
+<!-- <script>
+var slider
+var output
+for (var x=1; x<6; x++){
+  slider = document.getElementById('s'+x);
+  output = document.getElementById('rangeValue'+x);
+  output.innerHTML = slider.value;
+  slider.oninput = function() {
+    output.innerHTML = this.value;
+  }
+}
+</script> -->
 
 {% endblock %}
