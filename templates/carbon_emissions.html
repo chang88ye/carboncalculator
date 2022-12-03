@@ -1,0 +1,217 @@
+{%extends "index.html" %}
+
+
+{% block mainContent %}
+
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/*body {
+background: linear-gradient(to right, red, yellow);
+}*/
+/*.slider {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+width: 500px;
+height: 60px;
+padding: 30px;
+padding-left: 40px;
+background: #fcfcfc;
+border-radius: 20px;
+display: flex;
+align-items: center;
+box-shadow: 0px 15px 40px #7E6D5766;
+}*/
+.slider p {
+font-size: 16px;
+font-weight: 600;
+font-family: Open Sans;
+padding-left: 30px;
+color: black;
+}
+/*.slider input[type="range"] {
+-webkit-appearance:none !important;
+width: 200px;
+height: 2px;
+background: black;
+border: none;
+outline: none;
+}
+.slider input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none !important;
+width: 20px;
+height:20px;
+background: black;
+border: 2px solid black;
+border-radius: 50%;
+cursor: pointer;
+}*/
+.slider input[type="range"]::-webkit-slider-thumb:hover {
+background: black;
+}
+
+form label {
+  display: inline-block; /* this is important */
+  width: 350px;
+}
+</style>
+</head>
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-8">Carbon Emissions Calculator</h1>
+        <p class="lead">You can try out our awesome Carbon Emissions calculator</p>
+
+    </div>
+</div>
+
+<form class="container" action="{{url_for('carbon_calculate')}}" method="post">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-2">
+
+            <p style="font-size:2em">Import</p>
+
+
+            <h6>Fertilizer</h6>
+<!--             <p>
+            <input type="radio" name="fertilizer" value="yes" {{"checked" if request.form['fertilizer'] == 'yes' }}>Yes</input>
+            </p>
+            <p>
+            <input type="radio" name="fertilizer" value="no" checked="{{'checked' if request.form['fertilizer'] == 'no' }}" >No</input>
+            </p> -->
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="fertilizer" id="yes_f" value="yes" checked>
+              <label class="form-check-label" for="yes_f">
+                  Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="fertilizer" id="no_f" value="no" >
+              <label class="form-check-label" for="no_f">
+                  No
+              </label>
+            </div>
+
+            <h6>Plant Propagation</h6>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="plant" id="yes_p" value="yes" checked>
+              <label class="form-check-label" for="yes_p">
+                  Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="plant" id="no_p" value="no" >
+              <label class="form-check-label" for="no_p">
+                  No
+              </label>
+            </div>
+
+            <h6>Soil Management</h6>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="soil" id="yes_s" value = "yes" checked>
+              <label class="form-check-label" for="yes_s">
+                  Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="soil" id="no_s" value="no" >
+              <label class="form-check-label" for="yes_s">
+                  No
+              </label>
+            </div>
+
+            <h6>Postharvest cooling</h6>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="post" id="yes_po" value="yes" checked>
+              <label class="form-check-label" for="yes_po">
+                  Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="post" id="no_po" value="no" >
+              <label class="form-check-label" for="no_po">
+                  No
+              </label>
+            </div>
+
+            <!-- <form action="carbon_emissions.html" method="get"> -->
+              <p>Transport Distance(Km):</p>
+              <input type="number" id = "transport" name ="transport" value="2600" required>
+              <p>Lettuce Weight(Kg):</p>
+              <input type="number" id = "weight" name = "weight" value="1000" required>
+            <!-- </form> -->
+            <p></p>
+
+
+            <p></p>
+            <!-- <p>Results: <input type="text" class="form-control" placeholder="Result" value="{{result1}}"/></p> -->
+             <input style="margin-top:7px; margin-bottom: 15px;" type="submit" name="action" value="Calculate" class="btn btn-primary">
+             <div>
+                 <textarea rows="10" cols="45" class="alert {{color}}">{{note1}}</textarea>
+             </div>
+        </div>
+
+        <div class="col-md-15 col-md-offset-2">
+
+            <p style="font-size:2em">Grown AgriTech Vertical Farming</p>
+
+            <div class="slider" style="margin-top:15px; margin-bottom: 15px;">
+            <label for="vf_fertilizer">Fertilizer (between 0 and 100%):</label>
+            <input type="range" id="vf_fertilizer" name="vf_fertilizer" min="0" max="100" value="5" oninput="rangeValue.innerText = this.value"> 
+            <span id="rangeValue">5</span>
+            </div>
+
+            <div class="slider" style="margin-top:15px; margin-bottom: 15px;">
+            <label for="vf_plant">Plant propagation (between 0 and 100%):</label>
+            <input type="range" id="vf_plant" name="vf_plant" min="0" max="100" value="5" oninput="rangeValue.innerText = this.value"> 
+            <span id="rangeValue">5</span>
+            </div>
+
+            <div class="slider" style="margin-top:15px; margin-bottom: 15px;">
+            <label for="vf_soil">Soil management (between 0 and 100%):</label>
+            <input type="range" id="vf_soil" name="vf_soil" min="0" max="100" value="0" oninput="rangeValue.innerText = this.value"> 
+            <span id="rangeValue">0</span>
+            </div>
+
+            <div class="slider" style="margin-top:15px; margin-bottom: 15px;">
+            <label for="vf_ph">Postharvest cooling (between 0 and 100%):</label>
+            <input type="range" id="vf_ph" name="vf_ph" min="0" max="100" value="0" oninput="rangeValue.innerText = this.value"> 
+            <span id="rangeValue">0</span>
+            </div>
+
+            <div class="slider" style="margin-top:15px; margin-bottom: 15px;">
+            <label for="vf_bm">Building & maintenance (between 0 and 100%):</label>
+            <input type="range" id="vf_bm" name="vf_bm" min="0" max="100" value="20" oninput="rangeValue.innerText = this.value"> 
+            <span id="rangeValue">20</span>
+            </div>
+
+            <!-- <form action="carbon_emissions.html" method="get"> -->
+            <p>Heating(kWh):
+            <input type="text" id = "vf_heat" name ="vf_heat" value="{{request.form['vf_heat'] or 0}}"></p>
+            <p>Lighting(kWh):
+            <input type="text" id = "vf_light" name ="vf_light" value="{{request.form['vf_light'] or 3.83}}"></p>
+            <p>Water Usage(Litre):
+            <input type="text" id = "vf_water" name ="vf_water" value="{{request.form['vf_water'] or 1}}"></p>
+            <p>Transport Distance(Km):
+            <input type="number" id = "vf_transport" name ="vf_transport" value="{{request.form['vf_transport'] or 0}}"></p>
+            <p>Lettuce Weight(Kg): 
+            <input type="number" id = "vf_weight" name = "vf_weight" value="{{request.form['vf_weight'] or 1000}}"></p>
+            <!-- </form> -->
+
+            <!-- <p>Results: <input type="text" class="form-control" placeholder="Result" value="{{result2}}"/></p> -->
+            <input style="margin-bottom: 15px;" type="submit" name="action" value="Calculate" class="btn btn-primary">
+            <div>
+               <textarea rows="10" cols="45" class="alert {{color}}">{{note2}}</textarea>
+            </div>
+
+        </div>
+
+      </div>
+
+</form>
+
+{% endblock %}

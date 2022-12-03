@@ -1,0 +1,68 @@
+{%extends "index.html" %}
+
+
+{% block mainContent %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-8">Advanced Calculator</h1>
+        <p class="lead">You can try out our awesome advanced calculator</p>
+
+    </div>
+</div>
+
+<form class="container" action="{{url_for('calculate_advanced')}}" method="post">
+    <div class="row">
+        <div  class="col-lg-2 col-md-3">
+            <input type="number" name = "firstNumber" class="form-control" placeholder="Insert Number"
+            required/>
+        </div>
+
+        <div class="col-lg-2">
+            <select id = "selectOperation" name="operation" class="form-control" required>
+                <option value="">Select a function...</option>
+                <option value="sin">sin</option>
+                <option value="cos">cos</option>
+                <option value="tan">tan</option>
+                <option value="squr">square root</option>
+
+                <option value="log">log</option>
+                <option value="exp">exp</option>
+                <option value="asinh">asinh</option>
+                <option value="acosh">acosh</option>
+                <option value="atanh">atanh</option>
+                <option value="asin">asin</option>
+                <option value="acos">acos</option>
+
+            </select>
+        </div>
+
+
+        <div class="col-lg-3">
+            <input type="submit" value="Calulate" class="btn btn-primary">
+
+        </div>
+
+        <div class="col-lg-3">
+            <div class="alert {{color}}">{{note}}</div>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="row mt-3">
+        <div class="col-lg-1">
+            <div class="text-center">=</div>
+        </div>
+
+        <div class="col-lg-3">
+            <input type="text" class="form-control" placeholder="Result" value="{{result}}"/>
+        </div>
+
+    </div>
+
+</form>
+
+{% endblock %}
